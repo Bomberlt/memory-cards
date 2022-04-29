@@ -7,11 +7,17 @@ export const cardsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://deckofcardsapi.com/api/"
   }),
+  tagTypes: ["Deck", "Cards"],
   endpoints: (builder) => ({
+    newDeck: builder.query({
+      query: () => "deck/new/shuffle/?deck_count=1",
+      providesTags: ["Deck"]
+    }),
     cards: builder.query({
-      query: () => "deck/gdci59nruaie/draw/?count=4"
-    }), // TODO: Endpoint to get new deck of cards
+      query: (deckId) => `deck/${deckId}/draw/?count=4`,
+      providesTags: ["Cards"]
+    }),
   })
 });
 
-export const { useCardsQuery } = cardsApi;
+export const { useNewDeckQuery, useCardsQuery } = cardsApi;
