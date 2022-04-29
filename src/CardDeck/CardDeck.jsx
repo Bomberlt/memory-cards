@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setCardsList } from '../CardsList/cardsListSlice'
 import { useCardsQuery } from "../cardsApi";
 import { shuffle } from '../utils';
@@ -6,6 +6,7 @@ const CardDeck = (props) => {
   const dispatch = useDispatch();
   const { id } = props;
   const response = useCardsQuery(id);
+  const cardsList = useSelector((state) => state.cardsList.cardsList);
   console.log('response');
   console.log(response);
 
@@ -34,8 +35,9 @@ const CardDeck = (props) => {
   })));
   
   console.log(cardsWithMetadata);
-
-  dispatch(setCardsList(cardsWithMetadata));
+  if (cardsList.length === 0) {
+    dispatch(setCardsList(cardsWithMetadata));
+  }
 
   const reloadCards = () => {
 

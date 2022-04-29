@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, lockCards, flipUpCard, flipNotLockedCards } from './cardsListSlice'
 import Card from '../Card/Card';
@@ -17,6 +17,7 @@ const CardsList = (props) => {
     if (displayBlocker) {
       return;
     }
+    console.log('flippppp')
     dispatch(increment());
 
     const flippedCard = cardsList.find(card => card.id === id);
@@ -36,17 +37,31 @@ const CardsList = (props) => {
   };
 
   const flipCardsDown = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
+    setLastFlipped([]);
     showBlocker(false);
     dispatch(flipNotLockedCards());
   }
+
+  useEffect(() => {
+    if (displayBlocker) {
+      const interval = setInterval(() => {
+        flipCardsDown();
+      }, 1000)
+      return () => {
+        clearInterval(interval);
+      }
+    }
+  });
 
   const allCardsUp = cardsList.length > 0 && !cardsList.some(card => !card.isFaceUp);
 
   return (
     <div>
     {allCardsUp && <WinScreen />}
-    {displayBlocker && (<div className='blocker' onClick={flipCardsDown}>flip back</div>)}
+    {displayBlocker && 
+      (<div className='blocker' onClick={flipCardsDown} >wrong pair</div>)
+    }
       <div className='cards-list'>
         {cardsList.map(card => 
         {
