@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Card.css'
 const Card = (props) => {
   const { id, value, suit, image, onFlip, locked, isFaceUp} = props;
