@@ -14,6 +14,9 @@ const CardsList = (props) => {
   const [displayBlocker, showBlocker] = useState(false);
 
   const cardFlipped = (id) => {
+    if (displayBlocker) {
+      return;
+    }
     dispatch(increment());
 
     const flippedCard = cardsList.find(card => card.id === id);
@@ -32,12 +35,13 @@ const CardsList = (props) => {
     dispatch(flipUpCard(id));
   };
 
-  const flipCardsDown = () => {
+  const flipCardsDown = (e) => {
+    e.preventDefault();
     showBlocker(false);
     dispatch(flipNotLockedCards());
   }
 
-  const allCardsUp = !cardsList.some(card => !card.isFaceUp);
+  const allCardsUp = cardsList.length > 0 && !cardsList.some(card => !card.isFaceUp);
 
   return (
     <div>
@@ -60,7 +64,6 @@ const CardsList = (props) => {
         }
         )}
       </div>
-      Flip count: {flipCount}
     </div>
   );
 };

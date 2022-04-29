@@ -5,6 +5,8 @@ export const cardsListSlice = createSlice({
   initialState: {
     flipCount: 0,
     cardsList: [],
+    timePassed: 0,
+    gameCompleted: false,
   },
   reducers: {
     increment: (state) => {
@@ -33,10 +35,25 @@ export const cardsListSlice = createSlice({
           ? card
           : ({ ...card, isFaceUp: false })
         );
+    },
+    timePassed: (state, action) => {
+      state.timePassed = action.payload;
+    },
+    completeGame: (state) => {
+      state.gameCompleted = true;
     }
   },
 })
 
-export const { increment, reset, setCardsList, lockCards, flipUpCard, flipNotLockedCards } = cardsListSlice.actions
+export const {
+  increment,
+  reset,
+  setCardsList,
+  lockCards,
+  flipUpCard,
+  flipNotLockedCards,
+  timePassed,
+  completeGame,
+} = cardsListSlice.actions
 
 export default cardsListSlice.reducer
