@@ -15,35 +15,32 @@ const CardsList = (props) => {
   }));
   console.log(cardsWithMetadata);
   const [cardsList, setCardsList] = useState(cardsWithMetadata); // TODO: Move to redux
+  const [lastFlippedCard, setLastFlipped] = useState({});
+
 
   const [flipCount, setFlipCount] = useState(0);
+
+  const [displayBlocker, showBlocker] = useState(false);
 
   const cardFlipped = (id) => {
     setFlipCount(flipCount + 1);
 
     const flippedCard = cardsList.find(card => card.id === id);
+    setLastFlipped(flippedCard);
     console.log('flippedCard.code');
     console.log(flippedCard.code);
 
     let newCardsList = cardsList;
 
-    if (flipCount !== 0 && flipCount % 2 !== 0 &&
-      cardsList.find(card => card.isFaceUp && card.code === flippedCard.code)){
-      console.log('includes!!!');
+    if (lastFlippedCard.code === flippedCard.code){
       // TODO: Extract lock cards function
       newCardsList = newCardsList
         .map(card => card.code === flippedCard.code
           ? { ...card, locked: true}
           : card);
     } else {
-      if (flipCount !== 0 && flipCount % 2 === 0) {
-        console.log('second');
-        // TODO: Extract flip cards function
-        newCardsList = newCardsList
-          .map(card => card.locked ? card : ({
-            ...card,
-            isFaceUp: false,
-          }))
+      if (flipCount !== 0 && flipCount % 2 !== 0) {
+        showBlocker(true);
       }
     }
     
@@ -54,7 +51,19 @@ const CardsList = (props) => {
     );
   };
 
+  const flipCardsDown = () => {
+    showBlocker(false);
+    setCardsList(cardsList
+      .map(card => card.locked ? card : ({
+        ...card,
+        isFaceUp: false,
+      }))
+    );
+  }
+
   return (
+    <div>
+    {displayBlocker && (<div className='blocker' onClick={flipCardsDown}>flip back</div>)}
     <div className='cards-list'>
       {cardsList.map(card => 
       {
@@ -71,6 +80,7 @@ const CardsList = (props) => {
         />
       }
       )}
+    </div>
     </div>
   );
 };
