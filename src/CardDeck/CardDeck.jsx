@@ -44,7 +44,7 @@ const CardDeck = (props) => {
   return (
     <>
       <button onClick={() => reloadCards()}>
-        Rekoad cards
+        Reload cards
       </button>
     </>
   )

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { increment, lockCards, flipUpCard, flipNotLockedCards } from './cardsListSlice'
 import Card from '../Card/Card';
 import './CardsList.css';
+import WinScreen from '../WinScreen/WinScreen';
 
 const CardsList = (props) => {
   const dispatch = useDispatch();
@@ -36,8 +37,11 @@ const CardsList = (props) => {
     dispatch(flipNotLockedCards());
   }
 
+  const allCardsUp = !cardsList.some(card => !card.isFaceUp);
+
   return (
     <div>
+    {allCardsUp && <WinScreen />}
     {displayBlocker && (<div className='blocker' onClick={flipCardsDown}>flip back</div>)}
       <div className='cards-list'>
         {cardsList.map(card => 

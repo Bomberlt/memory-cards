@@ -40,21 +40,3 @@ export const cardsListSlice = createSlice({
 export const { increment, reset, setCardsList, lockCards, flipUpCard, flipNotLockedCards } = cardsListSlice.actions
 
 export default cardsListSlice.reducer
-
-// const fetchCards = () => async (dispatch) => {
-//   // TODO: Show loader
-//   const response = await usersAPI.fetchAll()
-
-//   const doubleCards = response.cards.concat(
-//     data.cards.map(card => ({...card, id: card.id+2, code: card.id}))
-//   );
-//   const cardsWithMetadata = doubleCards.map(card => ({
-//     ...card,
-//     code: card.code ?? card.id,
-//     locked: false,
-//     isFaceUp: false,
-//   }));
-//   console.log(cardsWithMetadata);
-
-//   dispatch(setCardsList(cardsWithMetadata));
-// }
