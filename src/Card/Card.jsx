@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import './Card.css'
 const Card = (props) => {
-  const { id, value, suit, image} = props;
-  const [faceUp, flip] = useState(false);
+  const { id, value, suit, image, onFlip, locked, isFaceUp} = props;
+  const flip = (isFaceUp) => {
+    onFlip(id);
+  }
 
-  if (!faceUp) {
+  if (!isFaceUp) {
     return (
-      <div id={id} className="Card" onClick={() => flip(true)} >
+      <div id={id} className="card" onClick={() => flip(true)} >
         face down
         <img
           src="https://deckofcardsapi.com/static/img/back.png"
@@ -17,8 +19,9 @@ const Card = (props) => {
   }
 
   return (
-    <div id={id} className="Card"  onClick={() => flip(false)} >
+    <div id={id} className={`card${locked ? ' locked' : ''}`} >
       <span>{value} {suit}</span>
+      {locked}
       <div>
         <img src={image} alt={value+suit}/> 
       </div>

@@ -1,8 +1,12 @@
-.Card {
+.card {
   width: 100px;
   margin: auto;
 }
 
-.Card img {
+.card img {
   width: 100px;
+}
+
+.card.locked {
+  background-color: greenyellow;
 }
