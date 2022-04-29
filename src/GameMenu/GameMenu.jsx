@@ -1,16 +1,35 @@
 import { useSelector, useDispatch } from 'react-redux'
 import data from '../data';
 import { setCardsList } from '../CardsList/cardsListSlice'
+import { useCardsQuery } from "../cardsApi";
+import { cardsApi } from "../cardsApi";
+import {useState} from 'react'
 
 const GameMenu = (props) => {
+  console.log(cardsApi);
   const dispatch = useDispatch();
 
-  const doubleCards = data.cards.concat(
-    data.cards.map(card => ({...card, id: card.id+2, code: card.id}))
-  );
+  const response = useCardsQuery();
+  console.log('response');
+  console.log(response);
+
+  if (response.isFetching) {
+    return (
+      <div>
+        ...refetching
+      </div>
+    )
+  }
+
+  const deckId = response.data.deck_id;
+
+  const doubleCards = response.data.cards
+    .map(card => ({...card, id: card.code}))
+    .concat(
+      response.data.cards.map(card => ({...card, id: card.code + '2', code: card.code}))
+    );
   const cardsWithMetadata = doubleCards.map(card => ({
     ...card,
-    code: card.code ?? card.id,
     locked: false,
     isFaceUp: false,
   }));

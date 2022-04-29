@@ -17,6 +17,8 @@ const CardsList = (props) => {
 
     const flippedCard = cardsList.find(card => card.id === id);
     setLastFlipped(flippedCard);
+    console.log(id);
+    console.log(flippedCard);
 
     if (lastFlippedCard.code === flippedCard.code){
       dispatch(lockCards(flippedCard.code));
