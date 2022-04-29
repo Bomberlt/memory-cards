@@ -9,7 +9,6 @@ const Card = (props) => {
   if (!isFaceUp) {
     return (
       <div id={id} className="card" onClick={() => flip(true)} >
-        face down
         <img
           src="https://deckofcardsapi.com/static/img/back.png"
           alt="card back"
@@ -20,8 +19,6 @@ const Card = (props) => {
 
   return (
     <div id={id} className={`card${locked ? ' locked' : ''}`} >
-      <span>{value} {suit}</span>
-      {locked}
       <div>
         <img src={image} alt={value+suit}/> 
       </div>

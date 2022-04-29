@@ -14,7 +14,7 @@ export const cardsApi = createApi({
       providesTags: ["Deck"]
     }),
     cards: builder.query({
-      query: (deckId) => `deck/${deckId}/draw/?count=4`,
+      query: (deckId) => `deck/${deckId}/draw/?count=12`,
       providesTags: ["Cards"]
     }),
   })
