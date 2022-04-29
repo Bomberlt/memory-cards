@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, setCardsList } from './cardsListSlice'
+import { increment, lockCards, flipUpCard, flipNotLockedCards } from './cardsListSlice'
 import Card from '../Card/Card';
 import './CardsList.css';
 
 const CardsList = (props) => {
-  const cardsList = useSelector((state) => state.cardsList.cardsList);
-  // const [cardsList, setCardsList] = useState(cardsFromRedux); // TODO: Move to redux
-  const [lastFlippedCard, setLastFlipped] = useState({});
-
-
-  const flipCount = useSelector((state) => state.cardsList.flipCount);
   const dispatch = useDispatch();
+  const cardsList = useSelector((state) => state.cardsList.cardsList);
+  const flipCount = useSelector((state) => state.cardsList.flipCount);
 
+  const [lastFlippedCard, setLastFlipped] = useState({});
   const [displayBlocker, showBlocker] = useState(false);
 
   const cardFlipped = (id) => {
@@ -20,38 +17,21 @@ const CardsList = (props) => {
 
     const flippedCard = cardsList.find(card => card.id === id);
     setLastFlipped(flippedCard);
-    console.log('flippedCard.code');
-    console.log(flippedCard.code);
-
-    let newCardsList = cardsList;
 
     if (lastFlippedCard.code === flippedCard.code){
-      // TODO: Extract lock cards function
-      newCardsList = newCardsList
-        .map(card => card.code === flippedCard.code
-          ? { ...card, locked: true}
-          : card);
+      dispatch(lockCards(flippedCard.code));
     } else {
       if (flipCount !== 0 && flipCount % 2 !== 0) {
         showBlocker(true);
       }
     }
     
-    dispatch(setCardsList(
-      newCardsList.map(card => card.id === id
-        ? ({...card, isFaceUp: true })
-        : card)
-    ));
+    dispatch(flipUpCard(id));
   };
 
   const flipCardsDown = () => {
     showBlocker(false);
-    dispatch(setCardsList(cardsList
-      .map(card => card.locked ? card : ({
-        ...card,
-        isFaceUp: false,
-      }))
-    ));
+    dispatch(flipNotLockedCards());
   }
 
   return (
