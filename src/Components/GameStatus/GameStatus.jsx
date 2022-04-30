@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { setTimePassed } from '../CardsList/cardsListSlice'
+import { useEffect } from 'react';
+import { setTimePassed } from '../../cardsListSlice'
 
 const GameStatus = () => {
   const flipCount = useSelector((state) => state.cardsList.flipCount);

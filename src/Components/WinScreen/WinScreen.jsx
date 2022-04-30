@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import './WinScreen.css';
 import { useSelector, useDispatch } from 'react-redux'
-import { completeGame } from '../CardsList/cardsListSlice'
-import { compareScores } from "../utils";
+import { completeGame } from '../../cardsListSlice'
+import { compareScores } from "../../utils";
 
 const WinScreen = () => {
   const dispatch = useDispatch();

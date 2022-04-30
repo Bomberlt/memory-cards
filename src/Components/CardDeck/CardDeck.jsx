@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setCardsList } from '../CardsList/cardsListSlice'
-import { useCardsQuery } from "../cardsApi";
-import { shuffle } from '../utils';
+import { setCardsList } from '../../cardsListSlice'
+import { useCardsQuery } from "../../cardsApi";
+import { shuffle } from '../../utils';
 const CardDeck = (props) => {
   const dispatch = useDispatch();
   const { id } = props;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, lockCards, flipUpCard, flipNotLockedCards } from './cardsListSlice'
+import { increment, lockCards, flipUpCard, flipNotLockedCards } from '../../cardsListSlice'
 import Card from '../Card/Card';
 import './CardsList.css';
 import WinScreen from '../WinScreen/WinScreen';

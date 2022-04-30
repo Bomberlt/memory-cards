@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cardsListSlice from '../CardsList/cardsListSlice'
+import cardsListSlice from '../cardsListSlice'
 import { cardsApi } from "../cardsApi";
 console.log(cardsApi);
 

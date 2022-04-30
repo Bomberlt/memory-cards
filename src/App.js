@@ -1,9 +1,9 @@
 import './App.css';
 import { useSelector } from 'react-redux'
-import CardsList from './CardsList/CardsList';
-import GameMenu from './GameMenu/GameMenu';
-import GameStatus from './GameStatus/GameStatus';
-import TopScores from './TopScores/TopScores';
+import CardsList from './Components/CardsList/CardsList';
+import GameMenu from './Components/GameMenu/GameMenu';
+import GameStatus from './Components/GameStatus/GameStatus';
+import TopScores from './Components/TopScores/TopScores';
 
 function App() {
   const gameCompleted = useSelector((state) => state.cardsList.gameCompleted);
