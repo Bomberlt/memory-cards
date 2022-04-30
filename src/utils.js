@@ -5,3 +5,9 @@ export function shuffle(a) {
   }
   return a;
 }
+
+export function compareScores(a, b) {
+  return a.flipCount === b.flipCount
+    ? a.timePassed - b.timePassed
+    : a.flipCount - b.flipCount;
+}

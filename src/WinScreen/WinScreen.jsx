@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import './WinScreen.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { completeGame } from '../CardsList/cardsListSlice'
+import { compareScores } from "../utils";
 
 const WinScreen = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,8 @@ const WinScreen = () => {
   const flipCount = useSelector((state) => state.cardsList.flipCount);
   const timePassed = useSelector((state) => state.cardsList.timePassed);
   const hasRunOnce = React.useRef(false);
+  const topCount = 10;
+
   useEffect(() => {
     if (hasRunOnce.current) {
       return;
@@ -17,13 +20,22 @@ const WinScreen = () => {
 
     hasRunOnce.current = true;
     const previousResults = JSON.parse(localStorage.getItem('results'));
+    const newEntry = {flipCount: flipCount, timePassed: timePassed};
     if (previousResults) {
-      localStorage.setItem('results', JSON.stringify(
-        [...previousResults, {flipCount: flipCount, timePassed: timePassed}]
-      ));
+      if (previousResults.length < topCount) {
+        localStorage.setItem('results', JSON.stringify(
+          ([...previousResults, newEntry]).sort(compareScores)
+        ));
+      } else {
+        if (previousResults.some(result => compareScores(result, newEntry) > 0)) {
+          localStorage.setItem('results', JSON.stringify(
+            ([...previousResults.slice(0, topCount - 1), newEntry]).sort(compareScores)
+          ));
+        }
+      }
     } else {
       localStorage.setItem('results', JSON.stringify(
-        [{flipCount: flipCount, timePassed: timePassed}]
+        [newEntry]
       ));
     }
   }, [flipCount, timePassed]);
