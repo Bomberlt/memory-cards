@@ -12,9 +12,6 @@ export const cardsListSlice = createSlice({
     increment: (state) => {
       state.flipCount += 1;
     },
-    reset: (state) => {
-      state.flipCount = 0;
-    },
     setCardsList: (state, action) => {
       state.cardsList = action.payload;
     },
@@ -41,19 +38,25 @@ export const cardsListSlice = createSlice({
     },
     completeGame: (state) => {
       state.gameCompleted = true;
+    },
+    restartGame: (state) => {
+      state.cardsList = [];
+      state.timePassed = 0;
+      state.flipCount = 0;
+      state.gameCompleted = false;
     }
   },
 })
 
 export const {
   increment,
-  reset,
   setCardsList,
   lockCards,
   flipUpCard,
   flipNotLockedCards,
   setTimePassed,
-  completeGame
+  completeGame,
+  restartGame
 } = cardsListSlice.actions
 
 export default cardsListSlice.reducer

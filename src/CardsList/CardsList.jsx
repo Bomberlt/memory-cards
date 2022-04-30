@@ -17,7 +17,6 @@ const CardsList = (props) => {
     if (displayBlocker) {
       return;
     }
-    console.log('flippppp')
     dispatch(increment());
 
     const flippedCard = cardsList.find(card => card.id === id);

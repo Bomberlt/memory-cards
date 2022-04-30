@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import CardsList from './CardsList/CardsList';
 import GameMenu from './GameMenu/GameMenu';
 import GameStatus from './GameStatus/GameStatus';
+import TopScores from './TopScores/TopScores';
 
 function App() {
   const gameCompleted = useSelector((state) => state.cardsList.gameCompleted);
@@ -18,6 +19,7 @@ function App() {
         <GameMenu/>
         <CardsList/>
         {!gameCompleted && <GameStatus />}
+        <TopScores/>
       </main>
     </div>
   );
