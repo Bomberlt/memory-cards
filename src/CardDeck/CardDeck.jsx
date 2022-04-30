@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setCardsList } from '../CardsList/cardsListSlice'
 import { useCardsQuery } from "../cardsApi";
@@ -7,8 +8,6 @@ const CardDeck = (props) => {
   const { id } = props;
   const response = useCardsQuery(id);
   const cardsList = useSelector((state) => state.cardsList.cardsList);
-  console.log('response');
-  console.log(response);
 
   if (response.isFetching) {
     return (
@@ -34,20 +33,12 @@ const CardDeck = (props) => {
     isFaceUp: false,
   })));
   
-  console.log(cardsWithMetadata);
   if (cardsList.length === 0) {
     dispatch(setCardsList(cardsWithMetadata));
   }
 
-  const reloadCards = () => {
-
-  };
-
   return (
     <>
-      <button onClick={() => reloadCards()}>
-        Reload cards
-      </button>
     </>
   )
 }

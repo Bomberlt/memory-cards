@@ -36,7 +36,7 @@ export const cardsListSlice = createSlice({
           : ({ ...card, isFaceUp: false })
         );
     },
-    timePassed: (state, action) => {
+    setTimePassed: (state, action) => {
       state.timePassed = action.payload;
     },
     completeGame: (state) => {
@@ -52,8 +52,8 @@ export const {
   lockCards,
   flipUpCard,
   flipNotLockedCards,
-  timePassed,
-  completeGame,
+  setTimePassed,
+  completeGame
 } = cardsListSlice.actions
 
 export default cardsListSlice.reducer
