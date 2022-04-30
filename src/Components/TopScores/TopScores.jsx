@@ -1,6 +1,7 @@
 
 
 const TopScores = () => {
+  // TODO: Use redux here
   const scores = JSON.parse(localStorage.getItem('results'));
   if (!scores) {
     return <div>No scores yet</div>;
@@ -8,7 +9,7 @@ const TopScores = () => {
 
   return (
     <div>
-      Previous scores:
+      Top scores:
       {scores.map(score => 
         <div>FlipCount: {score.flipCount}; TimePassed: {score.timePassed}</div>
       )}

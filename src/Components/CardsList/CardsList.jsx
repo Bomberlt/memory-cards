@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, lockCards, flipUpCard, flipNotLockedCards } from '../../cardsListSlice'
+import { lockCards, flipUpCard, flipNotLockedCards } from '../../cardsListSlice'
 import Card from '../Card/Card';
 import './CardsList.css';
-import WinScreen from '../WinScreen/WinScreen';
 
 const CardsList = (props) => {
   const dispatch = useDispatch();
   const cardsList = useSelector((state) => state.cardsList.cardsList);
-  const flipCount = useSelector((state) => state.cardsList.flipCount);
+  const flipCount = useSelector((state) => state.gameStatus.flipCount);
 
   const [lastFlippedCard, setLastFlipped] = useState({});
   const [displayBlocker, showBlocker] = useState(false);
@@ -17,12 +16,9 @@ const CardsList = (props) => {
     if (displayBlocker) {
       return;
     }
-    dispatch(increment());
 
     const flippedCard = cardsList.find(card => card.id === id);
     setLastFlipped(flippedCard);
-    console.log(id);
-    console.log(flippedCard);
 
     if (lastFlippedCard.code === flippedCard.code){
       dispatch(lockCards(flippedCard.code));

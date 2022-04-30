@@ -8,9 +8,6 @@ import WinScreen from './Components/WinScreen/WinScreen';
 
 function App() {
   const gameCompleted = useSelector((state) => state.gameStatus.gameCompleted);
-  console.log('gameCompleted');
-  console.log(gameCompleted);
-
   return (
     <div className="App">
       <header className="App-header">

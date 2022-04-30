@@ -6,8 +6,8 @@ import { compareScores } from "../../utils";
 
 const WinScreen = () => {
   const dispatch = useDispatch();
-  const flipCount = useSelector((state) => state.cardsList.flipCount);
-  const timePassed = useSelector((state) => state.cardsList.timePassed);
+  const flipCount = useSelector((state) => state.gameStatus.flipCount);
+  const timePassed = useSelector((state) => state.gameStatus.timePassed);
   const hasRunOnce = React.useRef(false);
   const topCount = 10;
 

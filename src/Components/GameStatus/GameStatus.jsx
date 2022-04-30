@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setTimePassed } from '../../cardsListSlice'
+import { setTimePassed } from '../../gameStatusSlice'
 
 const GameStatus = () => {
-  const flipCount = useSelector((state) => state.cardsList.flipCount);
-  const timePassed = useSelector((state) => state.cardsList.timePassed);
+  const flipCount = useSelector((state) => state.gameStatus.flipCount);
+  const timePassed = useSelector((state) => state.gameStatus.timePassed);
   const dispatch = useDispatch();
 
   const tick = () => {
