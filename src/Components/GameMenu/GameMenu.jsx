@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNewDeckQuery } from "../../cardsApi";
-import { restartGame } from '../../cardsListSlice'
+import { restartGame } from '../../gameStatusSlice'
 import CardDeck from "../CardDeck/CardDeck"
 const GameMenu = () => {
   const dispatch = useDispatch();

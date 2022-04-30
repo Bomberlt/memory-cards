@@ -32,7 +32,9 @@ const CardsList = (props) => {
       }
     }
     
-    dispatch(flipUpCard(id));
+    const lastCardUp = cardsList.length > 0 &&
+      cardsList.filter(card => !card.isFaceUp).length === 1;
+    dispatch(flipUpCard({id, lastCardUp}));
   };
 
   const flipCardsDown = (e) => {
@@ -53,11 +55,8 @@ const CardsList = (props) => {
     }
   });
 
-  const allCardsUp = cardsList.length > 0 && !cardsList.some(card => !card.isFaceUp);
-
   return (
     <div>
-    {allCardsUp && <WinScreen />}
     {displayBlocker && 
       (<div className='blocker' onClick={flipCardsDown} >wrong pair</div>)
     }

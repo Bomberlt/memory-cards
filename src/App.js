@@ -4,9 +4,10 @@ import CardsList from './Components/CardsList/CardsList';
 import GameMenu from './Components/GameMenu/GameMenu';
 import GameStatus from './Components/GameStatus/GameStatus';
 import TopScores from './Components/TopScores/TopScores';
+import WinScreen from './Components/WinScreen/WinScreen';
 
 function App() {
-  const gameCompleted = useSelector((state) => state.cardsList.gameCompleted);
+  const gameCompleted = useSelector((state) => state.gameStatus.gameCompleted);
   console.log('gameCompleted');
   console.log(gameCompleted);
 
@@ -17,6 +18,7 @@ function App() {
       </header>
       <main>
         <GameMenu/>
+        {gameCompleted && <WinScreen />}
         <CardsList/>
         {!gameCompleted && <GameStatus />}
         <TopScores/>

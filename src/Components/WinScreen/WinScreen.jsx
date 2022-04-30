@@ -2,12 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import './WinScreen.css';
 import { useSelector, useDispatch } from 'react-redux'
-import { completeGame } from '../../cardsListSlice'
 import { compareScores } from "../../utils";
 
 const WinScreen = () => {
   const dispatch = useDispatch();
-  dispatch(completeGame());
   const flipCount = useSelector((state) => state.cardsList.flipCount);
   const timePassed = useSelector((state) => state.cardsList.timePassed);
   const hasRunOnce = React.useRef(false);

@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { restartGame } from './gameStatusSlice'
+
 
 export const cardsListSlice = createSlice({
   name: 'cardsList',
@@ -6,7 +8,6 @@ export const cardsListSlice = createSlice({
     flipCount: 0,
     cardsList: [],
     timePassed: 0,
-    gameCompleted: false,
   },
   reducers: {
     increment: (state) => {
@@ -21,8 +22,24 @@ export const cardsListSlice = createSlice({
           ? { ...card, locked: true}
           : card);
     },
+    // flipUpCard: {
+    //   reducer: ( state, action ) => {
+    //     state.cardsList = state.cardsList
+    //       .map(card => card.id === action.payload.id
+    //         ? ({...card, isFaceUp: true })
+    //         : card
+    //       );
+    //   },
+    //   prepare: ( {id}) => {
+    //     const allCardsUp = state.cardsList.length > 0
+    //       && state.cardsList.filter(card => !card.isFaceUp).length == 1;
+    //     return {
+    //       payload: { id: id, allCardsUp: allCardsUp }
+    //     } 
+    //   }
+    // },
     flipUpCard: (state, action) => {
-      state.cardsList = state.cardsList.map(card => card.id === action.payload
+      state.cardsList = state.cardsList.map(card => card.id === action.payload.id
         ? ({...card, isFaceUp: true })
         : card)
     },
@@ -36,16 +53,14 @@ export const cardsListSlice = createSlice({
     setTimePassed: (state, action) => {
       state.timePassed = action.payload;
     },
-    completeGame: (state) => {
-      state.gameCompleted = true;
-    },
-    restartGame: (state) => {
+  },
+  extraReducers:  builder => {
+    builder.addCase(restartGame.type, (state, action) => {
       state.cardsList = [];
       state.timePassed = 0;
       state.flipCount = 0;
-      state.gameCompleted = false;
-    }
-  },
+    })
+  }
 })
 
 export const {
@@ -55,8 +70,6 @@ export const {
   flipUpCard,
   flipNotLockedCards,
   setTimePassed,
-  completeGame,
-  restartGame
 } = cardsListSlice.actions
 
 export default cardsListSlice.reducer
