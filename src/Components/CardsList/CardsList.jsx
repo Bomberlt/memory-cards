@@ -20,6 +20,7 @@ const CardsList = (props) => {
     const flippedCard = cardsList.find(card => card.id === id);
     setLastFlipped(flippedCard);
 
+    // TODO: Extract this logic out of component for testability
     if (lastFlippedCard.code === flippedCard.code){
       dispatch(lockCards(flippedCard.code));
     } else {
@@ -41,6 +42,7 @@ const CardsList = (props) => {
   }
 
   useEffect(() => {
+    // TODO: Extract this logic out of component for testability
     if (displayBlocker) {
       const interval = setInterval(() => {
         flipCardsDown();
