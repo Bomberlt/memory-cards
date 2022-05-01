@@ -13,7 +13,7 @@ export const cardsApi = createApi({
       query: () => "deck/new/shuffle/?deck_count=1"
     }),
     cards: builder.query({
-      query: (deckId) => `deck/${deckId}/draw/?count=2`
+      query: (deckId) => `deck/${deckId}/draw/?count=12`
     }),
     shuffleDeck: builder.query({
       query: (deckId) => `deck/${deckId}/shuffle`
