@@ -18,10 +18,6 @@ Requirements:
 - Browser should remember top results.
 - Images should be loaded using a public REST or GraphQL based API. You can select any api, but here are couple options, if you looking for inspiration:
 - Deck of cards API: https://deckofcardsapi.com/
-- Rick and Morty API https://rickandmortyapi.com/
-- Pokemon API: https://pokeapi.co/
-- Dogs API: https://dog.ceo/dog-api/
-- Magic The Gathering API: https://docs.magicthegathering.io/
 - Do not hardcode images names or ids in the app. Randomise and load a new set of images for each game.
 Notes:
 - If your selected API uses auth keys, they should be provided together with the code.
